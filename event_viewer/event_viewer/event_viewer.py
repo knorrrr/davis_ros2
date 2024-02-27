@@ -12,13 +12,9 @@ class EventViewerNode(Node):
     def __init__(self):
         super().__init__('event_viewer')
         self.get_logger().info('Initialized event viewer')
-        self.declare_parameter('input_topic_name', '/davis/events')
-        self.declare_parameter('output_topic_name', '/davis/event_img')
-        self.input_topic  = self.get_parameter('input_topic_name').get_parameter_value().string_value
-        self.output_topic = self.get_parameter('output_topic_name').get_parameter_value().string_value
         self.bridge  = CvBridge()
-        self.event_sub = self.create_subscription(EventArray, self.input_topic, self.callback, qos.qos_profile_sensor_data)
-        self.publisher = self.create_publisher(Image, self.output_topic, 1)
+        self.event_sub = self.create_subscription(EventArray, "~/input/event", self.callback, qos.qos_profile_sensor_data)
+        self.publisher = self.create_publisher(Image, "~/output/image", 1)
         self.timer     = self.create_timer(0.04, self.publish_callback)
         self.events_store = []
         self.img_height = 0
