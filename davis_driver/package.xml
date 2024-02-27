@@ -3,9 +3,9 @@
 <package format="3">
   <name>davis_ros2</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="kunotomoki61@gmail.com">hermes-22</maintainer>
-  <license>TODO: License declaration</license>
+  <description>ROS 2 driver for an iniVation event camera</description>
+  <maintainer email="kunotomoki61@gmail.com">knorrrr</maintainer>
+  <license>MIT License</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <depend>rclcpp</depend>
