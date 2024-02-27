@@ -11,8 +11,6 @@ DavisPublisher::DavisPublisher()
 : Node("davis_driver_node"), count_(0)
 {
   // declare_parameter
-  this->declare_parameter("event_topic", "/davis/events");
-  this->declare_parameter("image_topic", "/davis/image_raw");
   this->declare_parameter("frame_id",    "davis");
   this->declare_parameter<int> ("max_container_interval", 500);// micro sec
   this->declare_parameter<int> ("max_container_packet_size", 4098); 
@@ -39,15 +37,13 @@ DavisPublisher::DavisPublisher()
   this->declare_parameter<bool>("PRSFBP.typeNormal", true);
   this->declare_parameter<bool>("PRSFBP.currentLevelNormal", true);
 
-  event_topic_ = this->get_parameter("event_topic").get_value<std::string>();
-  image_topic_ = this->get_parameter("image_topic").get_value<std::string>();
   frame_id_    = this->get_parameter("frame_id").get_value<std::string>();
 
   auto parameter_change_cb = std::bind(&DavisPublisher::parameter_change_callback, this, std::placeholders::_1);
   reset_param_handler_     = this->add_on_set_parameters_callback(parameter_change_cb);
 
-  pub_event_ = create_publisher<ev_msgs::msg::EventArray>(event_topic_ ,rclcpp::SensorDataQoS());
-  pub_image_ = create_publisher<sensor_msgs::msg::Image> (image_topic_, rclcpp::SensorDataQoS());
+  pub_event_ = create_publisher<ev_msgs::msg::EventArray>("~/output/event" ,rclcpp::SensorDataQoS());
+  pub_image_ = create_publisher<sensor_msgs::msg::Image> ("~/output/image", rclcpp::SensorDataQoS());
 
   #ifndef NDEBUG
   libcaer::log::logLevelSet(libcaer::log::logLevel::DEBUG);
