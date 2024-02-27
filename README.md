@@ -41,7 +41,7 @@ ros2 run event_viewer event_viewer
 | Name                   | Default
 | --------------------   | ---------------------
 | 'input_topic_name'     | /davis/events 
-| 'ouput_topic_name'     | /davis/event_img 
+| 'ouput_topic_name'     | /davis/image_raw 
 
 # Q&A
 Q. To increase the hz of /davis/events
