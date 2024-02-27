@@ -13,7 +13,7 @@ sudo apt-get install libcaer-dev
 # Install
 ```bash
 mkdir -p ros2_ws/src && cd ros2_ws/src
-sudo git clone git@github.com:knorrrr/davis_ros2.git
+git clone https://github.com/knorrrr/davis_ros2.git
 cd ..
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
@@ -23,25 +23,31 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ## Usage
 ```bash
 source install/setup.bash
-ros2 run davis_ros2 davis_pub
+ros2 launch davis_ros2 driver.launch.xml
 ```
 ## Topics 
-| Topic name        | Description                            
-| ---------------   | ---------------------
-| /davis/events     | Events                                  
-| /davis/image_raw  | Image Frame(mono16)
+### Output (Default)
+| Name                                | Type                                            | Description                           |
+| ----------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| `~/output/event`                        | `ev_msgs::msg::EventArray`                 | Event information acquired by the event camera.　　|
+| `~/output/image`                         | `sensor_msgs::msg::Image`                  | Camera information acquired by the event camera. |
 
 # Events Viewer
 ## Usage
 ```bash
 source install/setup.bash
-ros2 run event_viewer event_viewer
+ros2 launch event_viewer event_viewer.launch.xml
 ```
-## Parameter 
-| Name                   | Default
-| --------------------   | ---------------------
-| 'input_topic_name'     | /davis/events 
-| 'ouput_topic_name'     | /davis/image_raw 
+## Topics
+### Input (Default)
+| Name                                | Type                                            | Description                           |
+| ----------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| `~/input/event`                     |  `ev_msgs::msg::EventArray`                     | Event information to be converted into images.|
+
+### Output (Default)
+| Name                                | Type                                            | Description                           |
+| ----------------------------------- | ----------------------------------------------- | ------------------------------------- |
+| `~/output/image`                      | `sensor_msgs::msg::Image`                       | Image with projected event information.                          |
 
 # Q&A
 Q. To increase the hz of /davis/events
