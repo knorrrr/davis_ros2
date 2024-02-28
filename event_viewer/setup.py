@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'event_viewer'
 
@@ -10,13 +12,14 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name), glob('launch/*.launch.xml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='ares-22',
-    maintainer_email='hogemoge@example.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='knorrrr',
+    maintainer_email='kunotomoki61@gmail.com',
+    description='Convert event information into images',
+    license='MIT License',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

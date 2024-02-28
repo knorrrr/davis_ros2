@@ -1,0 +1,33 @@
+/**:
+  ros__parameters:
+    frame_id: "davis"
+    max_container_interval: 500
+    max_container_packet_size: 4098
+    usb_early_packet_delay: 1
+    datachange_blocking: true
+    autoexposure_desired_intensity: 40000
+
+    # Enable Sensor Configuration
+    enable_image_raw: true
+    enable_events: true
+    enable_imu6: true
+    enable_noise_filter: false
+    enable_autoexposure: true
+
+    # PRBP Configuration
+    PRBP:
+      enabled: true
+      coarseValue: 2
+      fineValue: 58
+      sexN: false
+      typeNormal: true
+      currentLevelNormal: true
+
+    # PRSFBP Configuration
+    PRSFBP:
+      enabled: true
+      coarseValue: 1
+      fineValue: 33
+      sexN: false
+      typeNormal: true
+      currentLevelNormal: true

@@ -1,0 +1,8 @@
+<launch>
+  <arg name="input_event_topic" default="/davis/events"/>
+  <arg name="output_image_topic" default="/davis/event_image"/>
+  <node pkg="event_viewer" exec="event_viewer" name="event_viewer" output="screen">
+    <remap from="~/input/event" to="$(var input_event_topic)"/>
+    <remap from="~/output/image" to="$(var output_image_topic)"/>
+  </node>
+</launch>

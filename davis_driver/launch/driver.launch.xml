@@ -1,0 +1,10 @@
+<launch>
+  <arg name="output_image_topic" default="/davis/image_raw"/>
+  <arg name="output_event_topic" default="/davis/events"/>
+  <arg name="param_path" default="$(find-pkg-share davis_ros2)/config/driver_conf.yaml"/>
+  <node pkg="davis_ros2" exec="davis_pub" name="davis_pub" output="screen">
+    <remap from="~/output/event" to="$(var output_event_topic)"/>
+    <remap from="~/output/image" to="$(var output_image_topic)"/>
+    <param from="$(var param_path)"/>
+  </node>
+</launch>
